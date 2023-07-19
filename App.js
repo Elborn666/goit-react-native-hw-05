@@ -2,34 +2,49 @@ import React from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { useFonts } from 'expo-font';
 
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
-
-import LoginScreen from './Screens/AuthPages/LoginScreen';
-import RegistrationScreen from './Screens/AuthPages/RegistrationScreen';
-import Home from './Screens/Home';
-
-const MainStack = createStackNavigator();
+import LoginScreen from './src/screens/LoginScreen';
+import RegistrationScreen from './src/screens/RegistrationScreen';
+import Home from './src/screens/Home';
+import CreatePostsScreen from './src/screens/CreatePostsScreen';
+import ProfileScreen from './src/screens/ProfileScreen';
+import PostsScreen from './src/screens/PostsScreen';
+import MapScreen from './src/screens/MapScreen';
+import CommentsScreen from './src/screens/CommentsScreen';
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    Roboto: require('./assets/fonts/Roboto-Regular.ttf'),
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
+
+  const Stack = createStackNavigator();
+
   return (
-    <View style={styles.container}>
-      <NavigationContainer>
-        <MainStack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
-          <MainStack.Screen name="Regestration" component={RegistrationScreen} />
-          <MainStack.Screen name="Login" component={LoginScreen} />
-          <MainStack.Screen name="Home" component={Home} />
-        </MainStack.Navigator>
-        <StatusBar style="auto" />
-      </NavigationContainer>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="LoginScreen"
+        screenOptions={{ headerShown: false }}
+      >
+        <Stack.Screen
+          name="RegistrationScreen"
+          component={RegistrationScreen}
+        />
+        <Stack.Screen name="LoginScreen" component={LoginScreen} />
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen
+          name="CreatePostsScreen"
+          options={{ headerShown: true }}
+          component={CreatePostsScreen}
+        />
+        <Stack.Screen name="PostsScreen" component={PostsScreen} />
+        <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+        <Stack.Screen name="MapScreen" component={MapScreen} />
+        <Stack.Screen name="CommentsScreen" component={CommentsScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-});

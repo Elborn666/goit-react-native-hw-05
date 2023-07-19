@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "goit-react-native-hw-05",
-    "slug": "goit-react-native-hw-05",
+    "jsEngine": "hermes",
+    "name": "app_on_react-native",
+    "slug": "app_on_react-native",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -9,20 +10,21 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ffffff",
+      "permissions": ["CAMERA", "LOCATION"]
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
+      "softwareKeyboardLayoutMode": "pan",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       }
     },
+
     "web": {
       "favicon": "./assets/favicon.png"
     }
